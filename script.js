@@ -1,13 +1,16 @@
-// Smooth reveal on scroll
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
-  });
-});
+// Scroll animation for fade-in effects
+document.addEventListener("DOMContentLoaded", () => {
+  const fadeElements = document.querySelectorAll(".fade-in");
 
-document.querySelectorAll('.section').forEach(section => {
-  section.classList.add('hidden');
-  observer.observe(section);
+  const onScroll = () => {
+    fadeElements.forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight - 50) {
+        el.classList.add("visible");
+      }
+    });
+  };
+
+  window.addEventListener("scroll", onScroll);
+  onScroll(); // Trigger initially
 });
